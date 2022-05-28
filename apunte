@@ -1,0 +1,79 @@
+// if 
+
+const datoUsuario = prompt ("Ingrese una cadena")
+
+if (datoUsuario === "Saludar")
+{
+console.log ("Hola")
+}
+
+// if - else if
+
+if (datoUsuario==="Saludar")
+{
+    console.log ("Hola")
+}
+
+else if (datoUsuario==="Despedirse")
+{
+    console.log ("Adios")
+}
+
+else
+{
+    console.log ("OPCIÓN INVÁLIDA")
+}
+
+
+// operadores
+
+const condicion0 = 1 == "1"        // es booleano //
+console.log(condicion0)   // tira el valor verdadero // // == signfica el valor sea el mismo
+
+const condicion1 = 1 === "1"
+console.log(condicion1)   // tira valor falso // // === signfica el valor y el tipo de dato sea el mismo
+
+const condicion2 = 1!="1"
+console.log (condicion2) // falso
+
+const condicion3 = 1!=="1"
+console.log (condicion3) // true
+
+const condicion4 = 2<10
+console.log(condicion4) // true
+
+const condicion5 = 2<=10
+console.log (condicion5) // true
+
+const condicion6 = !condicion5
+console.log (condicion6) // falso porque el 5 es verdadero
+
+const condicion7 = condicion4 && condicion2
+console.log(condicion7) //es falso si todas las condiciones son verdaderas
+
+const condicion8 = condicion4 || condicion2
+console.log(condicion7) // verdadero ------ con que una sola sea verdadera, todo sera verdadero
+
+
+
+
+let numero = Number(prompt ("Escriba un numero"));
+let numero2 = Number(prompt ("Escriba otro numero"));
+
+let suma = numero+numero2
+let mul = numero*numero2
+
+alert ("La multiplicacion es:"+mul);
+
+console.log ("La suma es: "+suma)
+
+
+
+
+
+
+
+
+
+
+
