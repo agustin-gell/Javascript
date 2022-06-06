@@ -24,11 +24,11 @@ mostrarMenu()
 function mostrarMenu() {
   let opcion = 0;
 
-  while (opcion !== 10) {
+  while (opcion !== 3) {
     opcion = Number(prompt(`Seleccione una opción:
                           1. Agregar alumno
                           2. Eliminar alumno
-                          10. Salir`));
+                          3. Salir`));
 
     switch (opcion) {
       case 1: {
@@ -39,7 +39,7 @@ function mostrarMenu() {
         eliminarAlumno();
         break;
       }
-      case 10: {
+      case 3: {
         alert("SISTEMA CERRADO");
         break;
       }
@@ -62,7 +62,9 @@ function agregarAlumno() {
   var numeroDeRegistro = Number(prompt("INGRESE EL NÚMERO DE REGISTRO DEL ALUMNO"))
   let alumno = new Alumno(getId(), nombre, apellido, numeroDeRegistro);
 
+  
   alumnos.push(alumno);
+  console.log("ALUMNOS")
   console.table(alumnos);
 
   mostrarMenuNota()
@@ -88,6 +90,11 @@ function agregarAlumno() {
 
         case 3: {;
           break;
+        }
+
+        default: {
+          alert("INVÁLIDO");
+          break
         }
       }
     }
@@ -157,7 +164,9 @@ function agregarNota() {
 
   let div = notasTotales / numNotas
   let promedio = new Promedio (getId2(), div, numeroDeRegistro)
-  promedios.push(promedio);
+  
+  promedios.push(promedio)
+  console.log("PROMEDIOS")
   console.table(promedios)
 
   alert("EL PROMEDIO DEL ALUMNO ES " + div)
