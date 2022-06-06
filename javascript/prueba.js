@@ -10,6 +10,7 @@ class Alumno {
 
 const alumnos = []
 
+/*/ inputs /*/
 
 const inputNombre = document.createElement("input")
 inputNombre.type = "text"
@@ -51,17 +52,33 @@ promedio.type = "number"
 promedio.id = "promedio"
 document.body.appendChild(promedio)
 
-const boton = document.createElement("button")
-boton.innerHTML = "CALCULAR"
-document.body.appendChild(boton)
+/*/ inputs /*/
 
-const boton2 = document.createElement("button")
-boton2.innerHTML = "AGREGAR"
-document.body.appendChild(boton2)
+/*/ botones /*/
 
-boton.addEventListener("click", () => {
+const botonCalucular = document.createElement("button")
+botonCalucular.innerHTML = "CALCULAR"
+document.body.appendChild(botonCalucular)
+
+const botonAgregar = document.createElement("button")
+botonAgregar.innerHTML = "AGREGAR"
+document.body.appendChild(botonAgregar)
+
+/*/ botones /*/
+
+/*/ eventos /*/
+
+botonCalucular.addEventListener("click", () => {
     calcularProm();
 })
+
+botonAgregar.addEventListener("click", () => {
+    agregarAlumnos();
+})
+
+/*/ eventos /*/
+
+
 
 function calcularProm() {
     let nota1 = Number(document.getElementById("inputNota1").value)
@@ -72,12 +89,7 @@ function calcularProm() {
     promedio.value = total
 }
 
-boton2.addEventListener("click", () => {
-    listarAlumnos();
-})
-
-
-function listarAlumnos() {
+function agregarAlumnos() {
     let id = 1;
     if (alumnos.length > 0) {
         id = alumnos[alumnos.length - 1].id + 1;
@@ -119,6 +131,12 @@ function listarAlumnos() {
     tdPromedio.innerHTML = "Promedio";
     encabezado.appendChild(tdPromedio);
 
+    const tdAcciones = document.createElement("th");
+    tdAcciones.innerHTML = "Acciones";
+    encabezado.appendChild(tdAcciones);
+
+
+
     miLista.appendChild(encabezado)
 
     alumnos.forEach((alumno) => {
@@ -139,9 +157,13 @@ function listarAlumnos() {
         nodotd.innerHTML = `${alumno.prom}`;
         nodotr.appendChild(nodotd)
 
+        nodotd = document.createElement("td");
+        nodotd.innerHTML = `<button id=${alumno.id}>Borrar</button> | Editar`
+
         nodotr.appendChild(nodotd);
         miLista.appendChild(nodotr);
     });
 
-    document.body.appendChild(miLista);
+    document.body.appendChild(miLista)
+    programarEventos()
 }
