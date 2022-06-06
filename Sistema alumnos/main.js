@@ -1,9 +1,8 @@
 class Alumno {
-    constructor(id, nombre, apellido, numeroDeRegistro, prom) {
+    constructor(id, nombre, apellido, prom) {
         this.id = id
         this.nombre = nombre
         this.apellido = apellido
-        this.numeroDeRegistro = numeroDeRegistro
         this.prom = prom
     }
 }
@@ -23,12 +22,6 @@ inputApellido.type = "text"
 inputApellido.id = "inputApellido"
 inputApellido.placeholder = "APELLIDO"
 document.body.appendChild(inputApellido)
-
-const inputNumeroDeRegistro = document.createElement("input")
-inputNumeroDeRegistro.type = "text"
-inputNumeroDeRegistro.id = "inputNumeroDeRegistro"
-inputNumeroDeRegistro.placeholder = "NÚMERO DE REGISTRO"
-document.body.appendChild(inputNumeroDeRegistro)
 
 const inputNota1 = document.createElement("input")
 inputNota1.type = "number"
@@ -66,10 +59,6 @@ const botonAgregar = document.createElement("button")
 botonAgregar.innerHTML = "AGREGAR ALUMNO"
 document.body.appendChild(botonAgregar)
 
-const botonActualizar = document.createElement("button")
-botonActualizar.innerHTML = "ACTUALIZAR"
-document.body.appendChild(botonActualizar)
-
 
 /*/ botones /*/
 
@@ -83,10 +72,6 @@ botonAgregar.addEventListener("click", () => {
     agregarAlumnos()
 })
 
-botonActualizar.addEventListener("click", () => {
-    agregarAlumnos()
-})
-
 /*/ eventos /*/
 
 function calcularProm() {
@@ -96,6 +81,14 @@ function calcularProm() {
     let total = (nota1 + nota2 + nota3) / 3
 
     promedio.value = total.toFixed(2)
+
+    if (total>=0 && total <6) {
+        console.log("DESAPROBADO POR BOLUDO")
+    }
+
+    if (total>=6 && total <=10) {
+        console.log("APROBADO")
+    }
 }
 
 function agregarAlumnos() {
@@ -106,9 +99,8 @@ function agregarAlumnos() {
 
     let nombre = document.getElementById("inputNombre").value
     let apellido = document.getElementById("inputApellido").value
-    let numeroDeRegistro = document.getElementById("inputNumeroDeRegistro").value
     let prom = promedio.value
-    let alumno = new Alumno(id, nombre, apellido, numeroDeRegistro, prom)
+    let alumno = new Alumno(id, nombre, apellido, prom)
 
     alumnos.push(alumno)
     console.log(alumnos)
@@ -132,17 +124,16 @@ function agregarAlumnos() {
     encabezado.appendChild(tdApellido)
 
     const tdNumeroDeRegistro = document.createElement("th")
-    tdNumeroDeRegistro.innerHTML = "Número de registro"
+    tdNumeroDeRegistro.innerHTML = "ID"
     encabezado.appendChild(tdNumeroDeRegistro)
 
     const tdPromedio = document.createElement("th")
     tdPromedio.innerHTML = "Promedio";
     encabezado.appendChild(tdPromedio);
 
-    const tdAcciones = document.createElement("th");
-    tdAcciones.innerHTML = "Acciones";
-    tdAcciones.id = "tdAcciones"
-    encabezado.appendChild(tdAcciones);
+    const tdEstado = document.createElement("th")
+    tdEstado.innerHTML = "Estado";
+    encabezado.appendChild(tdEstado);
 
     miLista.appendChild(encabezado)
 
@@ -157,7 +148,7 @@ function agregarAlumnos() {
         nodotr.appendChild(nodotd);
 
         nodotd = document.createElement("td");
-        nodotd.innerHTML = `${alumno.numeroDeRegistro}`;
+        nodotd.innerHTML = `${alumno.id}`;
         nodotr.appendChild(nodotd);
 
         nodotd = document.createElement("td");
@@ -200,6 +191,5 @@ function eliminarUsuario() {
         console.log(alumnos);
 
     }
-
-
 }
+
