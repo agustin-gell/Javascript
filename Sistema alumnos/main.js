@@ -1,5 +1,5 @@
 class Alumno {
-    constructor(id, nombre, apellido, prom) {
+    constructor(id, nombre, apellido, prom, estado) {
         this.id = id
         this.nombre = nombre
         this.apellido = apellido
@@ -47,6 +47,12 @@ promedio.id = "promedio"
 promedio.placeholder = "PROMEDIO"
 document.body.appendChild(promedio)
 
+const estado = document.createElement("input")
+estado.type = "text"
+estado.id = "promedio"
+estado.placeholder = "ESTADO"
+document.body.appendChild(estado)
+
 /*/ inputs /*/
 
 /*/ botones /*/
@@ -59,6 +65,13 @@ const botonAgregar = document.createElement("button")
 botonAgregar.innerHTML = "AGREGAR ALUMNO"
 document.body.appendChild(botonAgregar)
 
+const botonListar = document.createElement("button")
+botonListar.innerHTML = "LISTAR ALUMNOS"
+document.body.appendChild(botonListar)
+
+const botonBuscar = document.createElement("button")
+botonBuscar.innerHTML = "BUSCAR ALUMNOS"
+document.body.appendChild(botonBuscar)
 
 /*/ botones /*/
 
@@ -72,21 +85,40 @@ botonAgregar.addEventListener("click", () => {
     agregarAlumnos()
 })
 
+botonListar.addEventListener("click", () => {
+    listarAlumnos()
+})
+
+botonBuscar.addEventListener("click", () => {
+    let encontrados = buscarUsuario();
+    listarAlumnos(encontrados);
+})
+
 /*/ eventos /*/
 
 function calcularProm() {
     let nota1 = Number(document.getElementById("inputNota1").value)
     let nota2 = Number(document.getElementById("inputNota2").value)
     let nota3 = Number(document.getElementById("inputNota3").value)
-    let total = (nota1 + nota2 + nota3) / 3
+    var total = (nota1 + nota2 + nota3) / 3
 
     promedio.value = total.toFixed(2)
 
-    if (total>=0 && total <6) {
-        console.log("DESAPROBADO POR BOLUDO")
+    if (nota1 === "" || nota2 === "" || nota3 === "") {
+        alert("DEBE LLENAR LOS CAMPOS DE NOTAS");
+        return false;
     }
 
-    if (total>=6 && total <=10) {
+    if (nota1 >= 10 || nota2 >= 10 || nota3 >= 10) {
+        alert("LAS NOTAS NO PUEDEN SER MAYORES A 10")
+        return false;
+    }
+
+    if (total >= 0 && total < 6) {
+        console.log("DESAPROBADO")
+    }
+
+    if (total >= 6 && total <= 10) {
         console.log("APROBADO")
     }
 }
@@ -102,10 +134,17 @@ function agregarAlumnos() {
     let prom = promedio.value
     let alumno = new Alumno(id, nombre, apellido, prom)
 
+    if (nombre === "" || apellido === "") {
+        alert("LOS CAMPOS DE NOMBRE Y APELLIDO NO PUEDEN ESTAR VACÍOS", );
+        return false;
+    }
+
+
     alumnos.push(alumno)
     console.log(alumnos)
+}
 
-
+function listarAlumnos() {
     let miLista = document.querySelector("#listaAlumnos")
     if (!miLista) {
         miLista = document.createElement("table")
@@ -123,17 +162,21 @@ function agregarAlumnos() {
     tdApellido.innerHTML = "Apellido"
     encabezado.appendChild(tdApellido)
 
-    const tdNumeroDeRegistro = document.createElement("th")
-    tdNumeroDeRegistro.innerHTML = "ID"
-    encabezado.appendChild(tdNumeroDeRegistro)
+    const tdID = document.createElement("th")
+    tdID.innerHTML = "ID"
+    encabezado.appendChild(tdID)
 
     const tdPromedio = document.createElement("th")
     tdPromedio.innerHTML = "Promedio";
-    encabezado.appendChild(tdPromedio);
+    encabezado.appendChild(tdPromedio)
 
     const tdEstado = document.createElement("th")
     tdEstado.innerHTML = "Estado";
     encabezado.appendChild(tdEstado);
+
+    const tdAcciones = document.createElement("th")
+    tdAcciones.innerHTML = "Acciones";
+    encabezado.appendChild(tdAcciones);
 
     miLista.appendChild(encabezado)
 
@@ -150,6 +193,10 @@ function agregarAlumnos() {
         nodotd = document.createElement("td");
         nodotd.innerHTML = `${alumno.id}`;
         nodotr.appendChild(nodotd);
+
+        nodotd = document.createElement("td");
+        nodotd.innerHTML = `${alumno.prom}`;
+        nodotr.appendChild(nodotd)
 
         nodotd = document.createElement("td");
         nodotd.innerHTML = `${alumno.prom}`;
@@ -193,3 +240,13 @@ function eliminarUsuario() {
     }
 }
 
+function buscarUsuario() {
+    let paramBusqueda = prompt("Ingresa el nombre que quieres buscar");
+
+    let encontrados = alumnos.filter((alumno) =>
+        alumno.nombre.toLowerCase().indexOf(paramBusqueda.toLowerCase()) !== -1 ||
+        alumno.apellido.toLowerCase().indexOf(paramBusqueda.toLowerCase()) !== -1);
+
+    return encontrados;
+
+}

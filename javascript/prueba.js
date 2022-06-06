@@ -1,115 +1,89 @@
-class Alumno {
-    constructor(id, nombre, apellido, numeroDeRegistro, prom) {
-        this.id = id
-        this.nombre = nombre
-        this.apellido = apellido
-        this.numeroDeRegistro = numeroDeRegistro
-        this.prom = prom
+class Usuario{
+    constructor(id,nombre,apellido, cumple)
+    {
+        this.id=id;
+        this.nombre=nombre;
+        this.apellido=apellido;
+        this.cumple=cumple;
     }
 }
 
-const alumnos = []
-
-/*/ inputs /*/
-
-const inputNombre = document.createElement("input")
-inputNombre.type = "text"
-inputNombre.id = "inputNombre"
-inputNombre.innerHTML = "Nota 1"
-document.body.appendChild(inputNombre)
-
-const inputApellido = document.createElement("input")
-inputApellido.type = "text"
-inputApellido.id = "inputApellido"
-inputApellido.innerHTML = "Nota 1"
-document.body.appendChild(inputApellido)
-
-const inputNumeroDeRegistro = document.createElement("input")
-inputNumeroDeRegistro.type = "text"
-inputNumeroDeRegistro.id = "inputNumeroDeRegistro"
-inputNumeroDeRegistro.innerHTML = "Nota 1"
-document.body.appendChild(inputNumeroDeRegistro)
-
-const inputNota1 = document.createElement("input")
-inputNota1.type = "number"
-inputNota1.id = "inputNota1"
-inputNota1.innerHTML = "Nota 1"
-document.body.appendChild(inputNota1)
-
-const inputNota2 = document.createElement("input")
-inputNota2.type = "number"
-inputNota2.id = "inputNota2"
-inputNota2.placeholder = "Nota 2"
-document.body.appendChild(inputNota2)
-
-const inputNota3 = document.createElement("input")
-inputNota3.type = "number"
-inputNota3.id = "inputNota3"
-document.body.appendChild(inputNota3)
-
-const promedio = document.createElement("input")
-promedio.type = "number"
-promedio.id = "promedio"
-document.body.appendChild(promedio)
-
-/*/ inputs /*/
-
-/*/ botones /*/
-
-const botonCalucular = document.createElement("button")
-botonCalucular.innerHTML = "CALCULAR"
-document.body.appendChild(botonCalucular)
-
-const botonAgregar = document.createElement("button")
-botonAgregar.innerHTML = "AGREGAR"
-document.body.appendChild(botonAgregar)
-
-/*/ botones /*/
-
-/*/ eventos /*/
-
-botonCalucular.addEventListener("click", () => {
-    calcularProm();
-})
-
-botonAgregar.addEventListener("click", () => {
-    agregarAlumnos();
-})
-
-/*/ eventos /*/
+/*
+    Inicializa la aplicación
+    Agrega H1 
+    Agrega Subtítulo
+*/
+function inicializarAplicacion() {
+    crearTitulo();
+    crearMenu();
 
 
-
-function calcularProm() {
-    let nota1 = Number(document.getElementById("inputNota1").value)
-    let nota2 = Number(document.getElementById("inputNota2").value)
-    let nota3 = Number(document.getElementById("inputNota3").value)
-    let total = (nota1 + nota2 + nota3) / 3
-
-    promedio.value = total
 }
 
-function agregarAlumnos() {
-    let id = 1;
-    if (alumnos.length > 0) {
-        id = alumnos[alumnos.length - 1].id + 1;
-    }
-
-    let nombre = document.getElementById("inputNombre").value
-    let apellido = document.getElementById("inputApellido").value
-    let numeroDeRegistro = document.getElementById("inputNumeroDeRegistro").value
-    let prom = promedio.value
-    let alumno = new Alumno(id, nombre, apellido, numeroDeRegistro, prom)
-
-    alumnos.push(alumno)
-    console.log(alumnos)
+function crearTitulo() {
+    const miTitulo = document.createElement("h1");
+    miTitulo.innerText = "Sistema de Gestión de Usuarios";
+    document.body.appendChild(miTitulo);
+}
+function crearMenu() {
+    const listaOpciones = ["Listar Usuarios",
+        "Agregar Usuario",
+        "Buscar Usuario"
+    ];
 
 
+    listaOpciones.forEach((opcion) => {
 
-    let miLista = document.querySelector("#listaAlumnos");
+        const btn = document.createElement("button");
+        btn.innerText = opcion;
+
+        switch (opcion) {
+            case "Listar Usuarios":
+                {
+                    btn.addEventListener("click",
+                        () => {
+                            listarUsuarios(usuarios);
+                        }
+                    )
+                    break;
+                }
+            case "Agregar Usuario":
+                {
+                    btn.addEventListener("click",
+                        () => {
+                            agregarUsuario();
+                        })
+                    break;
+                }
+            case "Buscar Usuario":
+                    {
+                        btn.addEventListener("click",
+                            () => {
+                              let encontrados =  buscarUsuario();
+                              listarUsuarios(encontrados);
+                              console.table();
+                            })
+                        break;
+                    }
+        }
+
+
+
+        document.body.appendChild(btn);
+
+    })
+
+
+
+}
+/*
+    Muestra el listado de usuarios del sistema
+*/
+function listarUsuarios(miListaDeUsuarios) {
+    let miLista = document.querySelector("#listaUsuarios");
     if (!miLista) {
         miLista = document.createElement("table");
-        miLista.setAttribute("id", "listaAlumnos");
+        miLista.setAttribute("id", "listaUsuarios");
     }
     miLista.innerHTML = "";
 
@@ -123,47 +97,227 @@ function agregarAlumnos() {
     tdApellido.innerHTML = "Apellido";
     encabezado.appendChild(tdApellido);
 
-    const tdNumeroDeRegistro = document.createElement("th");
-    tdNumeroDeRegistro.innerHTML = "Número de registro";
-    encabezado.appendChild(tdNumeroDeRegistro);
-
-    const tdPromedio = document.createElement("th");
-    tdPromedio.innerHTML = "Promedio";
-    encabezado.appendChild(tdPromedio);
+    const tdCumpleanos = document.createElement("th");
+    tdCumpleanos.innerHTML = "Cumpleaños:";
+    encabezado.appendChild(tdCumpleanos);
 
     const tdAcciones = document.createElement("th");
     tdAcciones.innerHTML = "Acciones";
     encabezado.appendChild(tdAcciones);
 
-
-
     miLista.appendChild(encabezado)
 
-    alumnos.forEach((alumno) => {
+    miListaDeUsuarios.forEach((usuario) => {
         const nodotr = document.createElement("tr");
         let nodotd = document.createElement("td");
-        nodotd.innerHTML = `${alumno.nombre}`;
+        nodotd.innerHTML = `${usuario.nombre}`;
         nodotr.appendChild(nodotd)
 
         nodotd = document.createElement("td");
-        nodotd.innerHTML = `${alumno.apellido}`;
+        nodotd.innerHTML = `${usuario.apellido}`;
         nodotr.appendChild(nodotd);
 
         nodotd = document.createElement("td");
-        nodotd.innerHTML = `${alumno.numeroDeRegistro}`;
+        nodotd.innerHTML = `No reporta`;
         nodotr.appendChild(nodotd);
 
         nodotd = document.createElement("td");
-        nodotd.innerHTML = `${alumno.prom}`;
-        nodotr.appendChild(nodotd)
-
-        nodotd = document.createElement("td");
-        nodotd.innerHTML = `<button id=${alumno.id}>Borrar</button> | Editar`
-
+        nodotd.innerHTML = `<button id=${usuario.id}>Borrar</button> | Editar`;
+        
         nodotr.appendChild(nodotd);
         miLista.appendChild(nodotr);
     });
 
-    document.body.appendChild(miLista)
-    programarEventos()
+    document.body.appendChild(miLista);
+    programarEventos();
 }
+
+function programarEventos()
+{
+    usuarios.forEach((element)=>{
+        const btn = document.getElementById(element.id);
+        btn.addEventListener("click", ()=>eliminarUsuario());
+    })
+}
+
+function agregarUsuario() {
+    let id = 1;
+    if (usuarios.length > 0) {
+        id = usuarios[usuarios.length - 1].id + 1;
+    }
+
+    let nombre = prompt("ingrese un nombre");
+    let apellido = prompt("ingrese un apellido");
+    let usuario = new Usuario(id, nombre, apellido);
+
+    usuarios.push(usuario);
+    console.table(usuarios);
+    listarUsuarios(usuarios);
+}
+
+function buscarUsuario() {
+    let paramBusqueda = prompt("Ingresa el nombre que quieres buscar");
+
+    let encontrados = usuarios.filter((usuario) =>
+     usuario.nombre.toLowerCase().indexOf(paramBusqueda.toLocaleLowerCase()) !== -1 || 
+     usuario.apellido.toLowerCase().indexOf(paramBusqueda.toLocaleLowerCase()) !== -1);
+    
+    return encontrados;
+
+}
+
+
+function eliminarUsuario(){
+
+    let id= Number(prompt("Ingrese el id del usuario que quiere eliminar"));
+ 
+    let encontrado = usuarios.find((usuario)=>usuario.id===id);
+ 
+   if(!encontrado)
+   {
+       alert("Usuario no Encontrado");
+   }
+   else{
+ 
+        let index = usuarios.indexOf(encontrado);
+ 
+        usuarios.splice(index,1);
+ 
+        console.log("Borrar usuario");
+        console.log(usuarios);
+ 
+   }
+    
+ 
+ }
+
+ // Haga un sistema CRUD para administrar usuarios. 
+// Un usuario debe tener un id, nombre y apellido. 
+// El sistema debe permitir: 
+// Agregar un usuario
+// Eliminar un usuario dado su id
+// Buscar un usuario, dado su nombre 
+// Editar el nombre y apellido de un usuario, dado su id
+
+ // Mostar un menu
+ // Ingresar Datos 
+ // Pedir id del que quiere eliminar
+ // Pedir el nombre del que quiere buscar
+ // Pedir el ide dl que quiere modificat
+ // Crear clase usuario 
+ 
+
+
+ const usuario1 = new Usuario(1, "Natalia", "Chiara");
+ const usuario2 = new Usuario(2, "Diego", "Del Hoyo");
+ const usuario3 = new Usuario(3, "Alejandro", "Lombardi");
+ const usuario4 = new Usuario(4, "Diego", "Castro");
+ const usuario5 = new Usuario(5, "Gabriel", "Odirozola");
+ const usuario6 = new Usuario(6, "Juan", "Ferrari");
+
+const usuarios = [usuario1,usuario2,usuario3, usuario4, usuario5, usuario6];
+console.log("INICIAL:", usuarios);
+
+inicializarAplicacion();
+//mostrarMenu();
+
+
+function mostrarMenu()
+{
+   let opcion = 0;
+   
+   while(opcion!==10)
+   {
+       opcion = Number( prompt(`Seleccione una acción:
+                           1. Agregar Usuario 
+                           2. Eliminar Usuario
+                           3. Modificar Usuario
+                           4. Listar usuarios
+                           5. Buscar Usuario
+                           6. Listar NOMBRE + APELLIDO
+                           10. Salir`));
+
+   switch(opcion)
+   {
+       case 1:
+       {
+           agregarUsuario();
+           break;
+       }
+       case 2: 
+       {
+           eliminarUsuario();
+       }
+       case 3: 
+       {
+           modificarUsuario();
+       }
+       case 4:
+       {
+           listarUsuarios();
+           break;
+       }
+       case 5:
+       {
+               buscarUsuario();
+               break;
+       }
+       case 6:
+       {
+               listarNombreMasApellido();
+               break;
+       }
+       default:{
+           alert("opcion inválida");
+           break;
+       }
+      
+   }
+
+   }
+}
+
+
+
+
+
+
+
+
+
+function modificarUsuario()
+{
+   let id= Number(prompt("Ingrese el id del usuario que quiere modificar"));
+
+   let existe = usuarios.some((usuario)=>usuario.id===id);
+
+   if(existe)
+   {
+       let encontrado = usuarios.find((usuario)=>usuario.id===id);
+       let nuevoNombre = prompt("Ingrese el nuevo nombre");
+       let nuevoApellido = prompt("Ingrese el nuevo apellido");
+
+       encontrado.nombre = nuevoNombre;
+       encontrado.apellido= nuevoApellido;
+
+       console.log("MODIFICACION")
+       console.log(usuarios);
+   }
+   else
+   {
+       alert("Usuario no econtrado")
+   }
+
+}
+
+
+function listarNombreMasApellido()
+{
+   let nombresYApellidos = usuarios.map(
+       (usuario)=>usuario.apellido+ " " + usuario.nombre);
+
+   console.log("MAP:");
+   console.log(nombresYApellidos);
+
+}
+
