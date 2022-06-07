@@ -1,7 +1,55 @@
 <!DOCTYPE html>
+
 <head>
     <script defer src="javascript/mod.js"></script>
 </head>
+
 <body>
-    
+    <!DOCTYPE html>
+
+    <head>
+        <link rel="stylesheet" href="css/style.css">
+
+    </head>
+
+    <body>
+        <div id="container">
+            <div id="registro" class="forms">
+                <h2>Login</h2>
+                <fieldset>
+                    <legend>Ingresa los datos de tu cuenta: </legend>
+                    <label>Username:</label><br>
+                    <input type="text" name="username" id="username" /><br>
+                    <label>Password:</label><br>
+                    <input type="text" name="password" id="password" /><br><br>
+                    <input type="checkbox" checked>
+                    <label>Guardar mis datos en este equipo:</label><br><br>
+                    <button id="submitLogin">ENVIAR</button>
+                </fieldset>
+
+            </div>
+            <div id="login" class="forms">
+                <h2>Crear Cuenta</h2>
+                <fieldset>
+                    <legend>Ingresa los datos para registrarte: </legend>
+                    <label>Username:</label><br>
+                    <input type="text" name="username" id="username" /><br>
+                    <label>Password:</label><br>
+                    <input type="text" name="password" id="password" /><br>
+                    <label>Confirm Password:</label><br>
+                    <input type="text" name="cpassword" id="cpassword" /><br>
+                    <label>Nombre:</label><br>
+                    <input type="text" name="nombre" id="nombre" /><br>
+                    <label>Apellido:</label><br>
+                    <input type="text" name="apellido" id="apellido" /><br>
+                    <br>
+                    <button id="submitCreate">ENVIAR</button>
+
+                </fieldset>
+            </div>
+
+        </div>
+    </body>
+
+    </html>
 </body>

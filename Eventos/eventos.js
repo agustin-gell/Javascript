@@ -47,11 +47,6 @@ promedio.id = "promedio"
 promedio.placeholder = "PROMEDIO"
 document.body.appendChild(promedio)
 
-const estado = document.createElement("input")
-estado.type = "text"
-estado.id = "promedio"
-estado.placeholder = "ESTADO"
-document.body.appendChild(estado)
 
 /*/ inputs /*/
 
@@ -69,10 +64,6 @@ const botonListar = document.createElement("button")
 botonListar.innerHTML = "LISTAR ALUMNOS"
 document.body.appendChild(botonListar)
 
-const botonBuscar = document.createElement("button")
-botonBuscar.innerHTML = "BUSCAR ALUMNOS"
-document.body.appendChild(botonBuscar)
-
 /*/ botones /*/
 
 /*/ eventos /*/
@@ -89,12 +80,9 @@ botonListar.addEventListener("click", () => {
     listarAlumnos()
 })
 
-botonBuscar.addEventListener("click", () => {
-    let encontrados = buscarUsuario();
-    listarAlumnos(encontrados);
-})
-
 /*/ eventos /*/
+
+/*/ funciones /*/
 
 function calcularProm() {
     let nota1 = Number(document.getElementById("inputNota1").value)
@@ -126,7 +114,7 @@ function calcularProm() {
 function agregarAlumnos() {
     let id = 1;
     if (alumnos.length > 0) {
-        id = alumnos[alumnos.length - 1].id + 1;
+        id = alumnos[alumnos.length - 1].id + 1
     }
 
     let nombre = document.getElementById("inputNombre").value
@@ -135,7 +123,7 @@ function agregarAlumnos() {
     let alumno = new Alumno(id, nombre, apellido, prom)
 
     if (nombre === "" || apellido === "") {
-        alert("LOS CAMPOS DE NOMBRE Y APELLIDO NO PUEDEN ESTAR VACÍOS");
+        alert("LOS CAMPOS DE NOMBRE Y APELLIDO NO PUEDEN ESTAR VACÍOS")
         return false;
     }
 
@@ -170,88 +158,31 @@ function listarAlumnos() {
     tdPromedio.innerHTML = "Promedio";
     encabezado.appendChild(tdPromedio)
 
-    const tdAcciones = document.createElement("th")
-    tdAcciones.innerHTML = "Acciones";
-    encabezado.appendChild(tdAcciones);
-    
-    const tdEstado = document.createElement("th")
-    tdEstado.innerHTML = "Estado";
-    encabezado.appendChild(tdEstado);
-
     miLista.appendChild(encabezado)
 
     alumnos.forEach((alumno) => {
-        const nodotr = document.createElement("tr");
-        let nodotd = document.createElement("td");
-        nodotd.innerHTML = `${alumno.nombre}`;
-        nodotr.appendChild(nodotd)
+        const tr = document.createElement("tr")
+        let td = document.createElement("td")
+        td.innerHTML = `${alumno.nombre}`
+        tr.appendChild(td)
 
-        nodotd = document.createElement("td");
-        nodotd.innerHTML = `${alumno.apellido}`;
-        nodotr.appendChild(nodotd);
+        td = document.createElement("td")
+        td.innerHTML = `${alumno.apellido}`
+        tr.appendChild(td)
 
-        nodotd = document.createElement("td");
-        nodotd.innerHTML = `${alumno.id}`;
-        nodotr.appendChild(nodotd);
+        td = document.createElement("td")
+        td.innerHTML = `${alumno.id}`
+        tr.appendChild(td)
 
-        nodotd = document.createElement("td");
-        nodotd.innerHTML = `${alumno.prom}`;
-        nodotr.appendChild(nodotd)
+        td = document.createElement("td")
+        td.innerHTML = `${alumno.prom}`
+        tr.appendChild(td)
 
-        if (promedio>=6)
-        {
-            nodotd = document.createElement("td");
-            nodotd.style.backgroundColor = ` #B3DEBA` 
-            nodotd.innerHTML = "APROBADO";
-            nodotr.appendChild(nodotd)
-        }
-            
-
-        nodotd = document.createElement("td");
-        nodotd.innerHTML = `<button id=${alumno.id}>Borrar</button>`
-
-        nodotr.appendChild(nodotd);
-        miLista.appendChild(nodotr);
-    });
+        tr.appendChild(td)
+        miLista.appendChild(tr)
+    })
 
     document.body.appendChild(miLista)
-    programarEventos()
 }
 
-function programarEventos() {
-    alumnos.forEach((element) => {
-        const botonBorrar = document.getElementById(element.id);
-        botonBorrar.addEventListener("click", () => eliminarUsuario());
-    })
-}
-
-function eliminarUsuario() {
-
-    let id = Number(prompt("Ingrese el id del usuario que quiere eliminar"));
-
-    let encontrado = alumnos.find((alumno) => alumno.id === id);
-
-    if (!encontrado) {
-        alert("USUARIO NO ENCONTRADO");
-    } else {
-
-        let index = alumnos.indexOf(encontrado);
-
-        alumnos.splice(index, 1);
-
-        console.log("Borrar usuario");
-        console.log(alumnos);
-
-    }
-}
-
-function buscarUsuario() {
-    let paramBusqueda = prompt("Ingresa el nombre que quieres buscar");
-
-    let encontrados = alumnos.filter((alumno) =>
-        alumno.nombre.toLowerCase().indexOf(paramBusqueda.toLowerCase()) !== -1 ||
-        alumno.apellido.toLowerCase().indexOf(paramBusqueda.toLowerCase()) !== -1);
-
-    return encontrados;
-
-}
+/*/ funciones /*/

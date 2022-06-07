@@ -1,0 +1,59 @@
+*{
+    margin: 0;
+}
+
+input {
+    margin: 20px;
+    height: 25px;
+    background-color: rgb(231, 203, 203);
+}
+
+button{
+    background-color: blue;
+    height: 35px;
+    color:white;
+    border-radius: 20px;
+    cursor: pointer;
+    text-transform: uppercase;
+    margin: 10px;
+}
+
+button:hover, button.active{
+    color:blue;
+    background-color: white;
+    border:1px solid blue;
+}
+
+table{
+    margin: 100px auto;
+    border: 5px solid black;
+    width: 1100px;
+}
+
+tr{
+    border: 1px black;
+}
+
+tr:nth-child(even){
+    color:black;
+}
+
+th{
+    width: 900px;
+    background-color: gray;
+    height: 50px;
+    text-transform: uppercase;
+    border: 1px black;
+}
+
+td{
+    height: 25px;
+    width: 500px;
+    text-align: center;
+    text-transform: uppercase;
+    border: 1px black;
+}
+
+#tdAcciones{
+    width: 800px;
+}
