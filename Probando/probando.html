@@ -3,26 +3,42 @@
 
 <head>
     <script defer src="probando.js"></script>
+    <link rel="stylesheet" href="styles.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sistema de gestión de alumnos</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+        </style>
 </head>
 
 <body>
 
-    <div>
-        <input type="text" id="inputNombre" placeholder="NOMBRE">
-        <input type="text" id="inputApellido" placeholder="APELLIDO">
-        <input type="number" id="inputNota1" placeholder="NOTA 1">
-        <input type="number" id="inputNota2" placeholder="NOTA 2">
-        <input type="number" id="inputNota3" placeholder="NOTA 3">
-        <input type="number" id="promedio" placeholder="PROMEDIO">
+    <h1>SISTEMA DE GESTIÓN DE ALUMNOS</h1>
+
+    <div class="inputs">
+        <form action="">
+            <label for="inputNombre">NOMBRE</label>
+            <input type="text" id="inputNombre" placeholder="NOMBRE">
+            <label for="inputApellido">APELLIDO</label>
+            <input type="text" id="inputApellido" placeholder="APELLIDO">
+            <label for="inputNota1">NOTA 1</label>
+            <input type="number" id="inputNota1" placeholder="NOTA 1">
+            <label for="inputNota2">NOTA 2</label>
+            <input type="number" id="inputNota2" placeholder="NOTA 2">
+            <label for="inputNota3">NOTA 3</label>
+            <input type="number" id="inputNota3" placeholder="NOTA 3">
+            <label for="promedio">PROMEDIO</label>
+            <input type="number" id="promedio" placeholder="PROMEDIO" disabled>
+        </form>
     </div>
 
-    <div>
+    <div class="botones">
         <button id="botonAgregar">AGREGAR ALUMNO</button>
-        <button id="botonListar">LISTAR ALUMNOS</button>
+        <button id="botonEliminar">ELIMINAR ALUMNO</button>
+        <button id="botonBuscar">BUSCAR ALUMNO</button>
+        <button id="botonModificar">MODIFICAR ALUMNO</button>
     </div>
 
 </body>

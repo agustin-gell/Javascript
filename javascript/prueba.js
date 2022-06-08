@@ -1,10 +1,9 @@
-class Usuario{
-    constructor(id,nombre,apellido, cumple)
-    {
-        this.id=id;
-        this.nombre=nombre;
-        this.apellido=apellido;
-        this.cumple=cumple;
+class Usuario {
+    constructor(id, nombre, apellido, cumple) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.cumple = cumple;
     }
 }
 
@@ -25,6 +24,7 @@ function crearTitulo() {
     miTitulo.innerText = "Sistema de Gestión de Usuarios";
     document.body.appendChild(miTitulo);
 }
+
 function crearMenu() {
     const listaOpciones = ["Listar Usuarios",
         "Agregar Usuario",
@@ -38,33 +38,30 @@ function crearMenu() {
         btn.innerText = opcion;
 
         switch (opcion) {
-            case "Listar Usuarios":
-                {
-                    btn.addEventListener("click",
-                        () => {
-                            listarUsuarios(usuarios);
-                        }
-                    )
-                    break;
-                }
-            case "Agregar Usuario":
-                {
-                    btn.addEventListener("click",
-                        () => {
-                            agregarUsuario();
-                        })
-                    break;
-                }
-            case "Buscar Usuario":
-                    {
-                        btn.addEventListener("click",
-                            () => {
-                              let encontrados =  buscarUsuario();
-                              listarUsuarios(encontrados);
-                              console.table();
-                            })
-                        break;
+            case "Listar Usuarios": {
+                btn.addEventListener("click",
+                    () => {
+                        listarUsuarios(usuarios);
                     }
+                )
+                break;
+            }
+            case "Agregar Usuario": {
+                btn.addEventListener("click",
+                    () => {
+                        agregarUsuario();
+                    })
+                break;
+            }
+            case "Buscar Usuario": {
+                btn.addEventListener("click",
+                    () => {
+                        let encontrados = buscarUsuario();
+                        listarUsuarios(encontrados);
+                        console.table();
+                    })
+                break;
+            }
         }
 
 
@@ -123,7 +120,7 @@ function listarUsuarios(miListaDeUsuarios) {
 
         nodotd = document.createElement("td");
         nodotd.innerHTML = `<button id=${usuario.id}>Borrar</button> | Editar`;
-        
+
         nodotr.appendChild(nodotd);
         miLista.appendChild(nodotr);
     });
@@ -132,11 +129,10 @@ function listarUsuarios(miListaDeUsuarios) {
     programarEventos();
 }
 
-function programarEventos()
-{
-    usuarios.forEach((element)=>{
+function programarEventos() {
+    usuarios.forEach((element) => {
         const btn = document.getElementById(element.id);
-        btn.addEventListener("click", ()=>eliminarUsuario());
+        btn.addEventListener("click", () => eliminarUsuario());
     })
 }
 
@@ -159,39 +155,37 @@ function buscarUsuario() {
     let paramBusqueda = prompt("Ingresa el nombre que quieres buscar");
 
     let encontrados = usuarios.filter((usuario) =>
-     usuario.nombre.toLowerCase().indexOf(paramBusqueda.toLocaleLowerCase()) !== -1 || 
-     usuario.apellido.toLowerCase().indexOf(paramBusqueda.toLocaleLowerCase()) !== -1);
-    
+        usuario.nombre.toLowerCase().indexOf(paramBusqueda.toLocaleLowerCase()) !== -1 ||
+        usuario.apellido.toLowerCase().indexOf(paramBusqueda.toLocaleLowerCase()) !== -1);
+
     return encontrados;
 
 }
 
 
-function eliminarUsuario(){
+function eliminarUsuario() {
 
-    let id= Number(prompt("Ingrese el id del usuario que quiere eliminar"));
- 
-    let encontrado = usuarios.find((usuario)=>usuario.id===id);
- 
-   if(!encontrado)
-   {
-       alert("Usuario no Encontrado");
-   }
-   else{
- 
+    let id = Number(prompt("Ingrese el id del usuario que quiere eliminar"));
+
+    let encontrado = usuarios.find((usuario) => usuario.id === id);
+
+    if (!encontrado) {
+        alert("Usuario no Encontrado");
+    } else {
+
         let index = usuarios.indexOf(encontrado);
- 
-        usuarios.splice(index,1);
- 
+
+        usuarios.splice(index, 1);
+
         console.log("Borrar usuario");
         console.log(usuarios);
- 
-   }
-    
- 
- }
 
- // Haga un sistema CRUD para administrar usuarios. 
+    }
+
+
+}
+
+// Haga un sistema CRUD para administrar usuarios. 
 // Un usuario debe tener un id, nombre y apellido. 
 // El sistema debe permitir: 
 // Agregar un usuario
@@ -199,36 +193,34 @@ function eliminarUsuario(){
 // Buscar un usuario, dado su nombre 
 // Editar el nombre y apellido de un usuario, dado su id
 
- // Mostar un menu
- // Ingresar Datos 
- // Pedir id del que quiere eliminar
- // Pedir el nombre del que quiere buscar
- // Pedir el ide dl que quiere modificat
- // Crear clase usuario 
- 
+// Mostar un menu
+// Ingresar Datos 
+// Pedir id del que quiere eliminar
+// Pedir el nombre del que quiere buscar
+// Pedir el ide dl que quiere modificat
+// Crear clase usuario 
 
 
- const usuario1 = new Usuario(1, "Natalia", "Chiara");
- const usuario2 = new Usuario(2, "Diego", "Del Hoyo");
- const usuario3 = new Usuario(3, "Alejandro", "Lombardi");
- const usuario4 = new Usuario(4, "Diego", "Castro");
- const usuario5 = new Usuario(5, "Gabriel", "Odirozola");
- const usuario6 = new Usuario(6, "Juan", "Ferrari");
 
-const usuarios = [usuario1,usuario2,usuario3, usuario4, usuario5, usuario6];
+const usuario1 = new Usuario(1, "Natalia", "Chiara");
+const usuario2 = new Usuario(2, "Diego", "Del Hoyo");
+const usuario3 = new Usuario(3, "Alejandro", "Lombardi");
+const usuario4 = new Usuario(4, "Diego", "Castro");
+const usuario5 = new Usuario(5, "Gabriel", "Odirozola");
+const usuario6 = new Usuario(6, "Juan", "Ferrari");
+
+const usuarios = [usuario1, usuario2, usuario3, usuario4, usuario5, usuario6];
 console.log("INICIAL:", usuarios);
 
 inicializarAplicacion();
 //mostrarMenu();
 
 
-function mostrarMenu()
-{
-   let opcion = 0;
-   
-   while(opcion!==10)
-   {
-       opcion = Number( prompt(`Seleccione una acción:
+function mostrarMenu() {
+    let opcion = 0;
+
+    while (opcion !== 10) {
+        opcion = Number(prompt(`Seleccione una acción:
                            1. Agregar Usuario 
                            2. Eliminar Usuario
                            3. Modificar Usuario
@@ -237,44 +229,37 @@ function mostrarMenu()
                            6. Listar NOMBRE + APELLIDO
                            10. Salir`));
 
-   switch(opcion)
-   {
-       case 1:
-       {
-           agregarUsuario();
-           break;
-       }
-       case 2: 
-       {
-           eliminarUsuario();
-       }
-       case 3: 
-       {
-           modificarUsuario();
-       }
-       case 4:
-       {
-           listarUsuarios();
-           break;
-       }
-       case 5:
-       {
-               buscarUsuario();
-               break;
-       }
-       case 6:
-       {
-               listarNombreMasApellido();
-               break;
-       }
-       default:{
-           alert("opcion inválida");
-           break;
-       }
-      
-   }
+        switch (opcion) {
+            case 1: {
+                agregarUsuario();
+                break;
+            }
+            case 2: {
+                eliminarUsuario();
+            }
+            case 3: {
+                modificarUsuario();
+            }
+            case 4: {
+                listarUsuarios();
+                break;
+            }
+            case 5: {
+                buscarUsuario();
+                break;
+            }
+            case 6: {
+                listarNombreMasApellido();
+                break;
+            }
+            default: {
+                alert("opcion inválida");
+                break;
+            }
 
-   }
+        }
+
+    }
 }
 
 
@@ -285,39 +270,33 @@ function mostrarMenu()
 
 
 
-function modificarUsuario()
-{
-   let id= Number(prompt("Ingrese el id del usuario que quiere modificar"));
+function modificarUsuario() {
+    let id = Number(prompt("Ingrese el id del usuario que quiere modificar"));
 
-   let existe = usuarios.some((usuario)=>usuario.id===id);
+    let existe = usuarios.some((usuario) => usuario.id === id);
 
-   if(existe)
-   {
-       let encontrado = usuarios.find((usuario)=>usuario.id===id);
-       let nuevoNombre = prompt("Ingrese el nuevo nombre");
-       let nuevoApellido = prompt("Ingrese el nuevo apellido");
+    if (existe) {
+        let encontrado = usuarios.find((usuario) => usuario.id === id);
+        let nuevoNombre = prompt("Ingrese el nuevo nombre");
+        let nuevoApellido = prompt("Ingrese el nuevo apellido");
 
-       encontrado.nombre = nuevoNombre;
-       encontrado.apellido= nuevoApellido;
+        encontrado.nombre = nuevoNombre;
+        encontrado.apellido = nuevoApellido;
 
-       console.log("MODIFICACION")
-       console.log(usuarios);
-   }
-   else
-   {
-       alert("Usuario no econtrado")
-   }
+        console.log("MODIFICACION")
+        console.log(usuarios);
+    } else {
+        alert("Usuario no econtrado")
+    }
 
 }
 
 
-function listarNombreMasApellido()
-{
-   let nombresYApellidos = usuarios.map(
-       (usuario)=>usuario.apellido+ " " + usuario.nombre);
+function listarNombreMasApellido() {
+    let nombresYApellidos = usuarios.map(
+        (usuario) => usuario.apellido + " " + usuario.nombre);
 
-   console.log("MAP:");
-   console.log(nombresYApellidos);
+    console.log("MAP:");
+    console.log(nombresYApellidos);
 
 }
-
