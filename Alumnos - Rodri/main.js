@@ -8,7 +8,23 @@ class Alumno {
     }
 }
 
-const alumnos = []
+let alumnos = []
+
+//Comprobar si existe el array, sino, creamos uno nuevo
+//Esto es para poder manipularlo, sea que tenga datos o no
+function getGlobalData() {
+    if (localStorage.key("allAlumnos") !== null) {
+        alumnos = JSON.parse(localStorage.getItem("allAlumnos"))
+    } else {
+        localStorage.setItem("allAlumnos", JSON.stringify(alumnos))
+    }
+}
+getGlobalData()
+
+function setGlobalData() {
+    localStorage.setItem("allAlumnos", JSON.stringify(alumnos))
+}
+
 
 /*/ eventos /*/
 
@@ -22,17 +38,13 @@ botonEliminar.addEventListener("click", () => {
     eliminarAlumno()
 })
 
-const botonBuscar = document.getElementById("botonBuscar")
-botonBuscar.addEventListener("click", () => {
-    buscarAlumnos()
-})
-
 const botonModificar = document.getElementById("botonModificar")
 botonModificar.addEventListener("click", () => {
     modificarAlumnos()
 })
 
-
+// const guardarLocalStorage = document.getElementById("btnStorage");
+// guardarLocalStorage.addEventListener("click",guardarAlumnos)
 
 /*/ fin de eventos /*/
 
@@ -98,11 +110,6 @@ function listarAlumnos() {
     document.body.appendChild(miLista)
     document.body.appendChild(miLista)
 
-var listaStore = localStorage.getItem("alumnos")
-
-if(listaStore == null){
-    
-}
 
 }
 
@@ -123,10 +130,6 @@ function agregarAlumnos() {
     if (nota1 > 10 || nota2 > 10 || nota3 > 10) {
         alert("LAS NOTAS NO PUEDEN SER MAYORES A 10")
         return false;
-    }
-
-    if (total <= 0 || total > 10) {
-        promedio.value = `NADA`
     }
 
     var estado = 0
@@ -154,12 +157,11 @@ function agregarAlumnos() {
         alert("LOS CAMPOS DE NOMBRE Y APELLIDO NO PUEDEN ESTAR VACÍOS")
         return false
     }
-
     alumnos.push(alumno)
-    console.log(alumnos)
 
+    setGlobalData()
     listarAlumnos()
-    localStorageLista()
+
 }
 
 function eliminarAlumno() {
@@ -178,7 +180,7 @@ function eliminarAlumno() {
 
         alert("ALUMNO ELIMINADO DEL SISTEMA")
         console.log(alumnos)
-
+        setGlobalData()
         listarAlumnos()
     }
 }
@@ -197,11 +199,9 @@ function modificarAlumnos() {
         encontrado.apellido = nuevoApellido
 
         console.log(alumnos)
-
+        setGlobalData()
         listarAlumnos()
-    } 
-    
-    else {
+    } else {
         alert("USUARIO NO ENCONTRADO")
     }
 
@@ -218,9 +218,3 @@ function buscarAlumnos() {
     return encontrados
 
 }
-
-
-function localStorageLista (){
-    localStorage.setItem("alumnos", JSON.stringify(alumnos))
-}
-
