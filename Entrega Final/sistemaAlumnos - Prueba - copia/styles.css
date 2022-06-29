@@ -1,0 +1,184 @@
+*{
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body{
+	background-color: #5bb5df;	
+}
+
+h1{
+    margin: 15px auto;
+    display: flex;
+    justify-content: center;
+    text-decoration: underline;
+}
+
+/*/ inputs /*/
+
+form{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: white;
+    border-radius: 3px;
+    color: black;
+    font-size: 0.8em;
+    padding: 20px;
+    margin: 20px auto;
+}
+
+input{
+    border: 0;
+    outline: none;
+    border: solid 1px black;
+    padding: 10px;
+    display: block;
+}
+
+input:focus{
+    border-color: rgb(17, 0, 255);
+}
+
+#promedio {
+    background-color: #dbdbdb;
+    color: black;
+}
+
+label {
+    margin: 10px 15px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/*/ inputs /*/
+
+#listaAlumnos{
+	margin: 30px auto;
+	width: 600px;
+}
+
+table{
+	background-color: white;
+	text-align: left;
+	border-collapse: collapse;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+th, td{
+	padding: 20px;
+    border: 1px solid black;
+}
+
+th{
+	background-color: #727272;
+	border-bottom: solid 5px #000000;
+	color: white;
+}
+
+tr:nth-child(even){
+	background-color: #ddd;
+}
+
+tr:hover td{
+	background-color: #369681;
+	color: white;
+}
+
+
+
+
+
+
+
+
+.botones {
+    display: flex;
+    justify-content: center;
+    margin: 15px;
+}
+
+.botones2 {
+    display: flex;
+    justify-content: center;
+    margin: 15px;
+}
+
+#botonAgregar, #botonEliminar, #botonModificar {
+	border-radius: 3px;
+	display: inline-block;
+	padding: 20px 15px;
+	text-decoration: none;
+	text-shadow: 0 1px 0 rgba(255,255,255,0.3);
+	box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+    margin: 10px;
+}
+
+#botonAgregar {
+	color: white;
+	background-color: gray;
+}
+
+#botonEliminar{
+    color: white;
+	background-color: gray;
+}
+
+#botonModificar{
+    color: white;
+	background-color: gray;
+}
+
+#botonAgregar:hover{
+	color: white;
+    background-color: rgb(10, 206, 10);	
+}
+
+#botonEliminar:hover{
+    color: white;
+    background-color: rgb(211, 16, 16);
+}
+
+#botonModificar:hover{
+    color: white;
+	background-color: rgb(37, 24, 207);
+}
+
+#botonListar{
+    color: #000000;
+}
+
+@media screen and (max-width: 720px) {
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}
+
+input {
+    width: 250px;
+}
+
+.botones {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.botones2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#listaAlumnos{
+	width: 50px;
+}
+
+table {
+    width: 50px;
+}
+
+}

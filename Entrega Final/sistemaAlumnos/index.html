@@ -3,6 +3,9 @@
 
 <head>
     <script defer src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <link rel="stylesheet" href="styles.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,7 +13,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
     </style>
-    <title>Document</title>
+    <title>Sistema de alumnos</title>
 </head>
 
 <body>
@@ -18,7 +21,7 @@
     <h1>SISTEMA DE NOTAS</h1>
 
     <div class="inputs">
-        <form action="">
+        <form id="form" action="">
             <label for="inputNombre">NOMBRE</label>
             <input type="text" id="inputNombre" placeholder="NOMBRE">
             <label for="inputApellido">APELLIDO</label>
@@ -37,11 +40,12 @@
     <div class="botones">
         <button id="botonAgregar">AGREGAR ALUMNO</button>
         <button id="botonEliminar">ELIMINAR ALUMNO</button>
-        <button id="botonModificar">MODIFICAR ALUMNO</button>
+        <button id="botonModificar">EDITAR ALUMNO</button>
     </div>
 
     <div class="botones2">
         <button id="botonListar">VER LISTA</button>
+        <button id="botonCargar">CARGAR LISTA</button>
     </div>
 
 </body>

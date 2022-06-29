@@ -30,6 +30,10 @@ function setGlobalData() {
 const botonAgregar = document.getElementById("botonAgregar")
 botonAgregar.addEventListener("click", () => {
     agregarAlumnos()
+
+    const form = document.getElementById("form")
+    form.reset()
+
 })
 
 const botonEliminar = document.getElementById("botonEliminar")
@@ -45,6 +49,11 @@ botonModificar.addEventListener("click", () => {
 const botonListar = document.getElementById("botonListar")
 botonListar.addEventListener("click", () => {
     listarAlumnos()
+})
+
+const botonCargar = document.getElementById("botonCargar")
+botonCargar.addEventListener("click", () => {
+    cargarAlumnos()
 })
 
 
@@ -124,32 +133,36 @@ function agregarAlumnos() {
 
     promedio.value = total.toFixed(2)
 
-    if (nota1 === "" || nota2 === "" || nota3 === "") {
-        alert("DEBE LLENAR LOS CAMPOS DE NOTAS")
+    if (nota1 === "0" || nota2 === "0" || nota3 === "0") {
+        Swal.fire({
+            title: 'DEBE LLENAR LOS CAMPOS DE NOTAS',
+            icon: 'warning',
+            confirmButtonText: 'OK'
+        })
+        return false;
+    }
+
+    if (nota1 === "" && nota2 === "" && nota3 === "") {
+        Swal.fire({
+            title: 'DEBE LLENAR LOS CAMPOS DE NOTAS',
+            icon: 'warning',
+            confirmButtonText: 'OK'
+        })
         return false;
     }
 
     if (nota1 > 10 || nota2 > 10 || nota3 > 10) {
-        alert("LAS NOTAS NO PUEDEN SER MAYORES A 10")
+        Swal.fire({
+            title: 'LAS NOTAS NO PUEDEN SER MAYORES A 10',
+            icon: 'warning',
+            confirmButtonText: 'OK'
+        })
         return false
-    }
-
-    if (promedio > 10) {
-        console.log("HOLA")
     }
 
     var estado = 0
 
     total > 6 ? estado = "APROBADO" : estado = "DESAPROBADO"
-
-
-    /*/ if (total > 0 && total < 6) {
-        estado = "DESAPROBADO"
-    }
-
-    if (total >= 6 && total <= 10) {
-        estado = "APROBADO"
-    } /*/
 
     let id = 1;
     if (alumnos.length > 0) {
@@ -163,13 +176,28 @@ function agregarAlumnos() {
     let alumno = new Alumno(id, nombre, apellido, prom, est)
 
     if (nombre === "" || apellido === "") {
-        alert("LOS CAMPOS DE NOMBRE Y APELLIDO NO PUEDEN ESTAR VACÍOS")
+
+        Swal.fire({
+            title: 'LOS CAMPOS DE NOMBRE Y APELLIDO NO PUEDEN ESTAR VACÍOS',
+            icon: 'warning',
+            confirmButtonText: 'OK'
+        })
         return false
     }
     alumnos.push(alumno)
 
     setGlobalData()
     listarAlumnos()
+
+    Toastify({
+        text: 'ALUMNO AGREGADO',
+        gravity: 'top',
+        position: 'right',
+        style: {
+            background: 'black'
+        },
+        duration: 3000,
+    }).showToast();
 
 }
 
@@ -180,14 +208,24 @@ function eliminarAlumno() {
     let encontrado = alumnos.find((alumno) => alumno.id === id)
 
     if (!encontrado) {
-        alert("ALUMNO NO ECONTRADO")
+        Swal.fire({
+            title: 'ALUMNO NO ENCONTRADO!',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        })
+
     } else {
 
         let index = alumnos.indexOf(encontrado)
 
         alumnos.splice(index, 1)
 
-        alert("ALUMNO ELIMINADO DEL SISTEMA")
+        Swal.fire({
+            title: "EL ALUMNO HA SIDO ELIMINADO DEL SISTEMA",
+            icon: 'success',
+            confirmButtonText: 'OK'
+        })
+
         console.log(alumnos)
         setGlobalData()
         listarAlumnos()
@@ -201,6 +239,8 @@ function modificarAlumnos() {
 
     if (existe) {
         let encontrado = alumnos.find((alumno) => alumno.id === id)
+        let opcion = 0
+
         let nuevoNombre = prompt("INGRESE EL NOMBRE")
         let nuevoApellido = prompt("INGRESE EL APELLIDO")
 
@@ -210,20 +250,56 @@ function modificarAlumnos() {
         console.log(alumnos)
         setGlobalData()
         listarAlumnos()
+
+        Toastify({
+            text: 'ALUMNO EDITADO',
+            gravity: 'top',
+            position: 'right',
+            style: {
+                background: 'black'
+            },
+            duration: 3000,
+        }).showToast();
+
     } else {
-        alert("USUARIO NO ENCONTRADO")
+        Swal.fire({
+            title: 'ALUMNO NO ENCONTRADO!',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        })
     }
 
 }
 
+function cargarAlumnos() {
+    fetch('./json/alumnos.json')
+        .then(respuesta => respuesta.json())
+        .then(alumnos => {
+            alumnos.forEach(alumno => {
+                const nodotr = document.createElement("tr")
+                let nodotd = document.createElement("td")
+                nodotd.innerHTML = `${alumno.nombre}`
+                nodotr.appendChild(nodotd)
 
-function buscarAlumnos() {
-    let paramBusqueda = prompt("Ingresa el nombre que quieres buscar")
+                nodotd = document.createElement("td")
+                nodotd.innerHTML = `${alumno.apellido}`
+                nodotr.appendChild(nodotd)
 
-    let encontrados = alumnos.filter((alumno) =>
-        alumno.nombre.toLowerCase().indexOf(paramBusqueda.toLocaleLowerCase()) !== -1 ||
-        alumno.apellido.toLowerCase().indexOf(paramBusqueda.toLocaleLowerCase()) !== -1);
+                nodotd = document.createElement("td")
+                nodotd.innerHTML = `${alumno.id}`
+                nodotr.appendChild(nodotd)
 
-    return encontrados
+                nodotd = document.createElement("td")
+                nodotd.innerHTML = `${alumno.prom}`
+                nodotr.appendChild(nodotd)
 
+                nodotd = document.createElement("td")
+                nodotd.innerHTML = `${alumno.est}`
+                nodotr.appendChild(nodotd)
+
+                nodotr.appendChild(nodotd)
+                miLista.appendChild(nodotr);
+            });
+        })
+        .catch(error => console.log('Hubo un error : ' + error.message))
 }

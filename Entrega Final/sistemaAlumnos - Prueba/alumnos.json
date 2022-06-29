@@ -1,0 +1,27 @@
+[
+    
+    {
+        "nombre": "Roberto",
+        "apellido": "Pérez",
+        "id": "502",
+        "prom": "6.67",
+        "est":"DESAPROBADO"
+    },
+
+    {
+        "nombre": "Alejandro",
+        "apellido": "Fernández",
+        "id": "506",
+        "prom": "7.00",
+        "est":"APROBADO"
+    },
+
+    {
+        "nombre": "Juan",
+        "apellido": "Rodríguez",
+        "id": "690",
+        "prom": "4.33",
+        "est":"DESAPROBADO"
+    }
+
+]
