@@ -11,21 +11,7 @@ class Alumno {
 let alumnos = []
 
 
-function tomarDatos() {
-    if (localStorage.key("Alumnos") !== null) {
-        alumnos = JSON.parse(localStorage.getItem("Alumnos"))
-    } else {
-        localStorage.setItem("Alumnos", JSON.stringify(alumnos))
-    }
-}
-
-tomarDatos()
-
-function recibirDatos() {
-    localStorage.setItem("Alumnos", JSON.stringify(alumnos))
-}
-
-/*/ eventos /*/
+/*/ EVENTOS /*/
 
 const botonAgregar = document.getElementById("botonAgregar")
 botonAgregar.addEventListener("click", () => {
@@ -51,7 +37,10 @@ botonListar.addEventListener("click", () => {
     listarAlumnos()
 })
 
-/*/findeeventos/*/
+/*/FIN DE EVENTOS/*/
+
+
+/*/ FUNCIONES /*/
 
 function listarAlumnos() {
     let miLista = document.querySelector("#listaAlumnos")
@@ -332,3 +321,19 @@ function modificarAlumnos() {
     }
 
 }
+
+function tomarDatos() {
+    if (localStorage.key("Alumnos") !== null) {
+        alumnos = JSON.parse(localStorage.getItem("Alumnos"))
+    } else {
+        localStorage.setItem("Alumnos", JSON.stringify(alumnos))
+    }
+}
+
+tomarDatos()
+
+function recibirDatos() {
+    localStorage.setItem("Alumnos", JSON.stringify(alumnos))
+}
+
+/*/ FIN DE FUNCIONES /*/

@@ -22,6 +22,22 @@
         "id": "690",
         "prom": "4.33",
         "est":"DESAPROBADO"
-    }
+    },
 
+    {
+        "nombre": "Marcelo",
+        "apellido": "Gutiérrez",
+        "id": "580",
+        "prom": "8.00",
+        "est":"APROBADO"
+    },
+
+    {
+        "nombre": "Pedro",
+        "apellido": "González",
+        "id": "745",
+        "prom": "7.33",
+        "est":"APROBADO"
+    }
+ 
 ]

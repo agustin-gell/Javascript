@@ -1,13 +1,13 @@
-*{
+* {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
 }
 
-body{
-	background-color: #5bb5df;	
+body {
+    background-color: #5bb5df;
 }
 
-h1{
+h1 {
     margin: 15px auto;
     display: flex;
     justify-content: center;
@@ -17,7 +17,7 @@ h1{
 
 /*/ inputs /*/
 
-form{
+form {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -29,7 +29,7 @@ form{
     margin: 20px auto;
 }
 
-input{
+input {
     border: 0;
     outline: none;
     border: solid 1px black;
@@ -37,7 +37,7 @@ input{
     display: block;
 }
 
-input:focus{
+input:focus {
     border-color: rgb(17, 0, 255);
 }
 
@@ -54,42 +54,43 @@ label {
 
 /*/ inputs /*/
 
-#listaAlumnos{
-	margin: 30px auto;
-	width: 600px;
+#listaAlumnos {
+    margin: 30px auto;
+    width: 600px;
 }
 
-#listaAlumnos{
-	margin: 30px auto;
-	width: 600px;
+#listaAlumnos {
+    margin: 30px auto;
+    width: 600px;
 }
 
-table{
-	background-color: white;
-	text-align: left;
-	border-collapse: collapse;
+table {
+    background-color: white;
+    text-align: left;
+    border-collapse: collapse;
     text-transform: uppercase;
     text-align: center;
 }
 
-th, td{
-	padding: 20px;
+th,
+td {
+    padding: 20px;
     border: 1px solid black;
 }
 
-th{
-	background-color: #727272;
-	border-bottom: solid 5px #000000;
-	color: white;
+th {
+    background-color: #727272;
+    border-bottom: solid 5px #000000;
+    color: white;
 }
 
-tr:nth-child(even){
-	background-color: #ddd;
+tr:nth-child(even) {
+    background-color: #ddd;
 }
 
-tr:hover td{
-	background-color: #369681;
-	color: white;
+tr:hover td {
+    background-color: #369681;
+    color: white;
 }
 
 
@@ -111,80 +112,178 @@ tr:hover td{
     margin: 15px;
 }
 
-#botonAgregar, #botonEliminar, #botonModificar {
-	border-radius: 3px;
-	display: inline-block;
-	padding: 20px 15px;
-	text-decoration: none;
-	text-shadow: 0 1px 0 rgba(255,255,255,0.3);
-	box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+#botonAgregar,
+#botonEliminar,
+#botonModificar {
+    border-radius: 3px;
+    display: inline-block;
+    padding: 20px 15px;
+    text-decoration: none;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
     margin: 10px;
 }
 
 #botonAgregar {
-	color: white;
-	background-color: gray;
-}
-
-#botonEliminar{
     color: white;
-	background-color: gray;
+    background-color: gray;
 }
 
-#botonModificar{
+#botonEliminar {
     color: white;
-	background-color: gray;
+    background-color: gray;
 }
 
-#botonAgregar:hover{
-	color: white;
-    background-color: rgb(10, 206, 10);	
+#botonModificar {
+    color: white;
+    background-color: gray;
 }
 
-#botonEliminar:hover{
+#botonAgregar:hover {
+    color: white;
+    background-color: rgb(10, 206, 10);
+}
+
+#botonEliminar:hover {
     color: white;
     background-color: rgb(211, 16, 16);
 }
 
-#botonModificar:hover{
+#botonModificar:hover {
     color: white;
-	background-color: rgb(37, 24, 207);
+    background-color: rgb(37, 24, 207);
 }
 
-#botonListar{
+#botonListar {
     color: #000000;
 }
 
-@media screen and (max-width: 720px) {
+@media screen and (min-width: 720px) {
 
-form {
-    display: flex;
-    flex-direction: column;
-    width: 300px;
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 40vw;
+    }
+
+    input {
+        width: 35vw;
+        display: flex;
+        justify-content: center;
+    }
+
+    .botones {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .botones2 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #listaAlumnos {
+        width: 50vw;
+    }
+
+    table {
+        width: 50vw;
+    }
+
 }
 
-input {
-    width: 250px;
-}
+/*/@media screen and (min-width: 1024px) {
 
-.botones {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+    #form {
+        display: grid;
+        grid-template-columns: 20% 30% 20% 30%;
+        grid-template-rows: 33% 34% 33%;
+        grid-template-areas:
+            "label1 nombre label2 apellido"
+            "label3 nota1 label4 nota2"
+            "label5 nota3 label6 promedio";
+            width: 70vw;
+    }
 
-.botones2{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+    #inputNombre {
+        grid-area: nombre;
+        margin-left: -7vw;
+    }
 
-#listaAlumnos{
-	width: 50px;
-}
+    #inputApellido {
+        grid-area: apellido;
+        margin-left: -6vw;
+    }
 
-table {
-    width: 50px;
-}
+    #inputNota1 {
+        grid-area: nota1;
+        margin-left: -7vw;
+    }
 
-}
+    #inputNota2 {
+        grid-area: nota2;
+        margin-left: -6vw;
+    }
+
+    #inputNota3 {
+        grid-area: nota3;
+        margin-left: -7vw;
+    }
+
+    #promedio {
+        grid-area: promedio;
+        margin-left: -6vw;
+    }
+
+    #label1 {
+        grid-area: label1;
+    }
+
+    #label2 {
+        grid-area: label2;
+    }
+
+    #label3 {
+        grid-area: label3;
+    }
+
+    #label4 {
+        grid-area: label4;
+    }
+
+    #label5 {
+        grid-area: label5;
+    }
+
+    #label6 {
+        grid-area: label6;
+    }
+
+    input {
+        width: 20vw;
+    }
+
+    .botones {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .botones2 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #listaAlumnos {
+        width: 70vw;
+    }
+
+    table {
+        width: 70vw;
+    }
+
+}/*/
